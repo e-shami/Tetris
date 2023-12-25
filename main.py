@@ -3,16 +3,22 @@ from src.Tetris import Tetris
 
 #Shapes of the blocks
 shapes = [
-        [[1, 5, 9, 13], [4, 5, 6, 7]],
-        [[4, 5, 9, 10], [2, 6, 5, 9]],
-        [[6, 7, 9, 10], [1, 5, 6, 10]],
-        [[2, 1, 5, 9], [0, 4, 5, 6], [1, 5, 9, 8], [4, 5, 6, 10]],
-        [[1, 2, 6, 10], [5, 6, 7, 9], [2, 6, 10, 11], [3, 5, 6, 7]],
-        [[1, 4, 5, 6], [1, 4, 5, 9], [4, 5, 6, 9], [1, 5, 6, 9]],
-        [[1, 2, 5, 6]],
+        [[1, 5, 9, 13], [4, 5, 6, 7]], # right angle shape -> L
+        [[4, 5, 9, 10], [2, 6, 5, 9]], # T shaped shape -> T
+        [[6, 7, 9, 10], [1, 5, 6, 10]], # Z shaped shape -> Z
+        [[2, 1, 5, 9], [0, 4, 5, 6], [1, 5, 9, 8], [4, 5, 6, 10]], # I shaped shape -> I
+        [[1, 2, 6, 10], [5, 6, 7, 9], [2, 6, 10, 11], [3, 5, 6, 7]], # S shaped shape -> S
+        [[1, 4, 5, 6], [1, 4, 5, 9], [4, 5, 6, 9], [1, 5, 6, 9]], # J shaped shape -> J
+        [[1, 2, 5, 6]], # square shaped shape -> square
     ]
 #Colors of the blocks
-shapeColors = [(0, 255, 0), (255, 0, 0), (0, 255, 255), (255, 255, 0), (255, 165, 0), (0, 0, 255), (128, 0, 128)]
+shapeColors = [(0, 255, 0), # green for I
+                (255, 0, 0), # red for Z
+                (0, 255, 255), # yellow for J
+                (255, 255, 0), #  Orange for L
+                (255, 165, 0), # cyan for S
+                (0, 0, 255), # blue for T 
+                (128, 0, 128)] # purple for square
 # GLOBALS VARS
 width = 700
 height = 600
@@ -36,13 +42,13 @@ pygame.font.init()
 def startGame():
     done = False
     clock = pygame.time.Clock()
-    fps = 25
+    fps = 60
     game = Tetris(blockSize, blockSize-10, shapes, shapeColors, gameDimensions, topLeft)
     counter = 0
 
     pressing_down = False
     
-    while not done:
+    while not done: # game is running until escape button pressed 
         #Create a new block if there is no moving block
         if game.block is None:
             game.new_block()
@@ -110,15 +116,15 @@ def startGame():
        
         game.draw_next_block(screen)
 
-        pygame.display.flip()
-        clock.tick(fps)
+        pygame.display.flip() #Updating the game window
+        clock.tick(fps) #Setting the fps to 60
 
 
 screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption("Tetris by Shehzad")
 run = True
 while run:
-    screen.fill((16, 57, 34 ))
+    screen.fill((70, 57, 64 ))
     font = pygame.font.SysFont("Calibri", 70, bold=True)
     label = font.render("Press any key to begin!", True, '#FFFFFF')
 

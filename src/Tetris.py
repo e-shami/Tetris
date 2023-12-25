@@ -3,7 +3,7 @@ import pygame
 from src.Block import Block
 
 class Tetris:
-    level = 2
+    level = 1
     score = 0
     state = "start"
     field = []
@@ -48,6 +48,7 @@ class Tetris:
                             j + self.block.x < 0 or \
                             self.field[i + self.block.y][j + self.block.x] > 0:
                         intersection = True
+                        
         return intersection
 
     #Checks if a row is formed and destroys that line
